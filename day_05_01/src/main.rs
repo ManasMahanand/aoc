@@ -13,7 +13,6 @@ fn main() {
     let mut rules: HashMap<u8, Vec<u8>> = HashMap::new();
 
     let mut parsing_rules = true;
-    let mut print_rules = true;
 
     'line_iterator: for line in file_reader.lines() {
         let line = line.expect("line exists");
@@ -37,17 +36,11 @@ fn main() {
                 rules.insert(num1, vec![num2]);
             }
         } else {
-            if print_rules {
-                print_rules = false;
-            }
             let print_order: Vec<u8> = line
                 .split(',')
                 .map(|el| el.parse::<u8>().unwrap())
                 .collect();
 
-            if print_order.len() % 2 == 0 {
-                println!("even length!");
-            }
             for i in 0..print_order.len() {
                 let curr = print_order[i];
                 let vals = rules.get(&curr);
